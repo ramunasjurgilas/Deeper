@@ -8,6 +8,7 @@
 import Foundation
 
 class AuthenticationService {
+    private static let mock = true
     static let shared = AuthenticationService()
     private let baseURL = "https://bathus.staging.deeper.eu/api"
 
@@ -21,6 +22,14 @@ class AuthenticationService {
     }
 
     func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        if AuthenticationService.mock {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                completion(.success(()))
+            }
+            return
+        }
+
+
         guard let url = URL(string: "\(baseURL)/login") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
             return

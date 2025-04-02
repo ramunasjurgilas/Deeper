@@ -11,7 +11,6 @@ import SwiftUI
 struct DeeperApp: App {
     let persistenceController = PersistenceController.shared
 
-
     var body: some Scene {
         WindowGroup {
             MainView()
