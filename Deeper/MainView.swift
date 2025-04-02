@@ -10,11 +10,24 @@ import SwiftUI
 struct MainView: View {
     @StateObject private var loginViewModel = LoginViewModel()
     @State private var isLoginPresented = true
+    @State private var selectedBathymetry: BathymetryResponse?
+    @State private var isActive: Bool = false
 
     var body: some View {
         NavigationView {
-            ScanViewScreen { scan in
+            ZStack {
+                ScanViewScreen { bathymetry in
+                    selectedBathymetry = bathymetry
+                    isActive = true
+                }
 
+                if let bathymetry = selectedBathymetry {
+                    NavigationLink(
+                        destination: BathymetryMapView(bathymetry: bathymetry),
+                        isActive: $isActive,
+                        label: { EmptyView() }
+                    )
+                }
             }
         }
         .sheet(isPresented: $isLoginPresented) {

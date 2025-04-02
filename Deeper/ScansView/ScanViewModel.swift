@@ -9,6 +9,7 @@ import Foundation
 
 class ScanViewModel: ObservableObject {
     @Published var isLoading: Bool = false
+    @Published var error: Error?
 
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -34,8 +35,7 @@ class ScanViewModel: ObservableObject {
                     print("Polygons", polygons)
                     completion(polygons)
                 case .failure(let error):
-                    print("Failed to fetch polygons", error)
-//                    completion(.failure(error))
+                    self?.error = error
                 }
             }
         }

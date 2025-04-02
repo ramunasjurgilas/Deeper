@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		000AF2812D9DE731007079BB /* BathymetryMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AF2802D9DE731007079BB /* BathymetryMapView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		000AF2442D9DC364007079BB /* Deeper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Deeper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		000AF2802D9DE731007079BB /* BathymetryMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BathymetryMapView.swift; path = Deeper/BathymetryMapView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -32,6 +37,7 @@
 		000AF23B2D9DC364007079BB = {
 			isa = PBXGroup;
 			children = (
+				000AF2802D9DE731007079BB /* BathymetryMapView.swift */,
 				000AF2462D9DC364007079BB /* Deeper */,
 				000AF2452D9DC364007079BB /* Products */,
 			);
@@ -119,6 +125,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000AF2812D9DE731007079BB /* BathymetryMapView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
