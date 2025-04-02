@@ -21,14 +21,13 @@ class AuthenticationService {
         return request
     }
 
-    func login(email: String, password: String, completion: @escaping (Result<Void, Error>) -> Void) {
+    func login(email: String, password: String, completion: @escaping (Result<LoginResponse, Error>) -> Void) {
         if AuthenticationService.mock {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                completion(.success(()))
+                completion(.success(LoginResponse.mock))
             }
             return
         }
-
 
         guard let url = URL(string: "\(baseURL)/login") else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
@@ -54,7 +53,7 @@ class AuthenticationService {
                         return
                     }
 
-                    completion(.success(()))
+                    completion(.success((responseJSON)))
                 }
             }.resume()
         } catch {

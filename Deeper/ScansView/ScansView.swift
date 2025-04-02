@@ -49,7 +49,3 @@ struct ScanView: View {
         }
     }
 }
-
-//#Preview {
-//    ScansView()
-//}
