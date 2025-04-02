@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		000AF2812D9DE731007079BB /* BathymetryMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 000AF2802D9DE731007079BB /* BathymetryMapView.swift */; };
+		000AF2862D9DEC11007079BB /* GoogleMaps in Frameworks */ = {isa = PBXBuildFile; productRef = 000AF2852D9DEC11007079BB /* GoogleMaps */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				000AF2862D9DEC11007079BB /* GoogleMaps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			);
 			name = Deeper;
 			packageProductDependencies = (
+				000AF2852D9DEC11007079BB /* GoogleMaps */,
 			);
 			productName = Deeper;
 			productReference = 000AF2442D9DC364007079BB /* Deeper.app */;
@@ -100,6 +103,9 @@
 			);
 			mainGroup = 000AF23B2D9DC364007079BB;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				000AF2842D9DEC11007079BB /* XCRemoteSwiftPackageReference "ios-maps-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 000AF2452D9DC364007079BB /* Products */;
 			projectDirPath = "";
@@ -331,6 +337,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		000AF2842D9DEC11007079BB /* XCRemoteSwiftPackageReference "ios-maps-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googlemaps/ios-maps-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		000AF2852D9DEC11007079BB /* GoogleMaps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 000AF2842D9DEC11007079BB /* XCRemoteSwiftPackageReference "ios-maps-sdk" */;
+			productName = GoogleMaps;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 000AF23C2D9DC364007079BB /* Project object */;
 }

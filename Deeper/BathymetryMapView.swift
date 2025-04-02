@@ -6,15 +6,25 @@
 //
 
 import SwiftUI
+import GoogleMaps
 
 struct BathymetryMapView: View {
-    let bathymetry: BathymetryResponse
-
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        GoogleMapsEmptyView()
     }
 }
 
+struct GoogleMapsEmptyView: UIViewRepresentable {
+    typealias UIViewType = GMSMapView
+
+    func makeUIView(context: Context) -> GMSMapView {
+        let camera = GMSCameraPosition.camera(withLatitude: 39.05, longitude: -120.025, zoom: 12)
+        return GMSMapView(frame: .zero, camera: camera)
+    }
+
+    func updateUIView(_ uiView: GMSMapView, context: Context) {}
+}
+
 #Preview {
-    BathymetryMapView(bathymetry: .dummyLake())
+    BathymetryMapView()
 }
