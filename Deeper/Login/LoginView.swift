@@ -10,6 +10,7 @@ import Combine
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
+    @State private var showAlert = false
 
     var body: some View {
         NavigationView {
@@ -39,7 +40,7 @@ struct LoginView: View {
                 Button(action: {
                     viewModel.login()
                 }) {
-                    if viewModel.isLoading {
+                    if viewModel.isLoginInProgress {
                         ProgressView()
                     } else {
                         Text("Sign In")
@@ -54,6 +55,16 @@ struct LoginView: View {
                 Spacer()
             }
             .padding()
+            .onReceive(viewModel.$errorMessage) { message in
+                showAlert = message != nil
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Login Error"),
+                    message: Text(viewModel.errorMessage ?? "Unknown error"),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
     }
 }

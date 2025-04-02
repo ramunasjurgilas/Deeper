@@ -8,18 +8,18 @@
 import Combine
 
 class LoginViewModel: ObservableObject {
-    @Published var email: String = ""
-    @Published var password: String = ""
-    @Published var isLoading: Bool = false
+    @Published var email: String = "deeperangler@gmail.com"
+    @Published var password: String = "Deeper108999"
+    @Published var isLoginInProgress: Bool = false
     @Published var errorMessage: String?
 
     func login() {
-        isLoading = true
+        isLoginInProgress = true
         errorMessage = nil
 
         AuthenticationService.shared.login(email: email, password: password) { [weak self] result in
             guard let self = self else { return }
-            self.isLoading = false
+            self.isLoginInProgress = false
 
             switch result {
             case .success:

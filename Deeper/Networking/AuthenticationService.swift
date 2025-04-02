@@ -11,12 +11,11 @@ class AuthenticationService {
     static let shared = AuthenticationService()
     private let baseURL = "https://bathus.staging.deeper.eu/api"
 
-    private func makeRequest(url: URL, method: String, headers: [String: String] = [:], body: Data? = nil) -> URLRequest {
+    private func makeRequest(url: URL, method: String, body: Data? = nil) -> URLRequest {
         var request = URLRequest(url: url)
         request.httpMethod = method
-        headers.forEach { key, value in
-            request.setValue(value, forHTTPHeaderField: key)
-        }
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("*/*", forHTTPHeaderField: "accept")
         request.httpBody = body
         return request
     }
@@ -27,13 +26,12 @@ class AuthenticationService {
             return
         }
 
-        let headers = ["Content-Type": "application/json"]
-        let bodyDict = ["email": email, "password": password]
+        let loginRequest = LoginRequest(email: email, password: password)
 
         do {
-            let bodyData = try JSONSerialization.data(withJSONObject: bodyDict, options: [])
-            let request = makeRequest(url: url, method: "POST", headers: headers, body: bodyData)
-
+            let bodyData = try JSONEncoder().encode(loginRequest)
+            let request = makeRequest(url: url, method: "POST", body: bodyData)
+            print("Curl", request.cURL())
             URLSession.shared.dataTask(with: request) { data, response, error in
                 DispatchQueue.main.async {
                     if let error = error {
@@ -62,8 +60,7 @@ class AuthenticationService {
             return
         }
 
-        let headers = ["Content-Type": "application/json"]
-        let request = makeRequest(url: url, method: "GET", headers: headers)
+        let request = makeRequest(url: url, method: "GET")
 
         URLSession.shared.dataTask(with: request) { data, response, error in
             DispatchQueue.main.async {

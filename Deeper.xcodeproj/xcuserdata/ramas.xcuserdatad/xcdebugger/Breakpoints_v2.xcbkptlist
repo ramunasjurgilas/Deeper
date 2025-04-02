@@ -7,15 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B843D311-5AB0-41B0-9CC0-1E456D87EE6F"
+            uuid = "22C7C0BD-B805-47D4-9919-75DC2E80BA9A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Deeper/Networking/AuthenticationService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
             landmarkName = "login(email:password:completion:)"
             landmarkType = "7">
          </BreakpointContent>
