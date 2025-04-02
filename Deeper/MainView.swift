@@ -13,7 +13,9 @@ struct MainView: View {
 
     var body: some View {
         NavigationView {
-            ScanView()
+            ScanViewScreen { scan in
+
+            }
         }
         .sheet(isPresented: $isLoginPresented) {
             LoginView(viewModel: loginViewModel)

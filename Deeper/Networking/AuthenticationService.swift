@@ -11,6 +11,7 @@ class AuthenticationService {
     private static let mock = true
     static let shared = AuthenticationService()
     private let baseURL = "https://bathus.staging.deeper.eu/api"
+    private var token: String = ""
 
     private func makeRequest(url: URL, method: String, body: Data? = nil) -> URLRequest {
         var request = URLRequest(url: url)
@@ -52,7 +53,7 @@ class AuthenticationService {
                         completion(.failure(NSError(domain: "Invalid response", code: 0)))
                         return
                     }
-
+                    self.token = responseJSON.login.token
                     completion(.success((responseJSON)))
                 }
             }.resume()
@@ -61,7 +62,14 @@ class AuthenticationService {
         }
     }
 
-    func fetchScanPolygons(scanId: Int, token: String, completion: @escaping (Result<Data, Error>) -> Void) {
+    func fetchScanPolygons(scanId: Int, completion: @escaping (Result<BathymetryResponse, Error>) -> Void) {
+        if AuthenticationService.mock {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                completion(.success(BathymetryResponse.dummyLake()))
+            }
+            return
+        }
+
         let urlString = "\(baseURL)/geoData?grid=FAST&generator=BS&scanIds=\(scanId)&token=\(token)"
         guard let url = URL(string: urlString) else {
             completion(.failure(NSError(domain: "Invalid URL", code: 0)))
@@ -82,7 +90,12 @@ class AuthenticationService {
                     return
                 }
 
-                completion(.success(data))
+                do {
+                    let decoded = try JSONDecoder().decode(BathymetryResponse.self, from: data)
+                    completion(.success(decoded))
+                } catch {
+                    completion(.failure(error))
+                }
             }
         }.resume()
     }
