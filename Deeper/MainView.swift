@@ -34,11 +34,11 @@ struct MainView: View {
             LoginView(viewModel: loginViewModel)
                 .interactiveDismissDisabled(true)
         }
-        .onChange(of: loginViewModel.isLoginInProgress, { oldValue, newValue in
+        .onChange(of: loginViewModel.isLoginInProgress) { newValue in
             if newValue == false && loginViewModel.errorMessage == nil {
                 isLoginPresented = false
             }
-        })
+        }
     }
 }
 
